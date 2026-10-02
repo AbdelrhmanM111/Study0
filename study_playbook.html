@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operations & Performance Management Study Playbook</title>
+<style>
+  body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+    background: #f0f4f8; 
+    color: #2c3e50; 
+    line-height: 1.6;
+  }
+  .container { 
+    max-width: 1000px; 
+    margin: auto; 
+    background: white; 
+    padding: 40px; 
+    border-radius: 12px; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+  }
+  h1 { color: #1a252f; border-bottom: 3px solid #3498db; padding-bottom: 10px; font-size: 2.2em;}
+  h2 { color: #2980b9; margin-top: 35px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+  h3 { color: #e67e22; margin-top: 25px;}
+  h4 { color: #34495e; }
+  
+  .phase { 
+    margin-bottom: 30px; 
+    padding: 25px; 
+    border-left: 6px solid #3498db; 
+    background: #fdfefe; 
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+  }
+  
+  .phase:nth-of-type(2) { border-left-color: #2ecc71; }
+  .phase:nth-of-type(3) { border-left-color: #9b59b6; }
+  .phase:nth-of-type(4) { border-left-color: #e74c3c; }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .card {
+    background: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .alert {
+    background-color: #fff3cd;
+    border-left: 5px solid #f39c12;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 5px 5px 0;
+  }
+
+  .quiz-section { 
+    margin-top: 50px; 
+    padding: 35px; 
+    background: #ffffff;
+    border: 3px solid #f1c40f; 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(241, 196, 15, 0.15);
+  }
+  
+  .quiz-question { margin-bottom: 20px; display: none; }
+  .quiz-question.active { display: block; }
+  .question-title { font-weight: bold; font-size: 1.2em; margin-bottom: 15px; color: #2c3e50;}
+  
+  .options label { 
+    display: block; 
+    padding: 12px; 
+    margin: 10px 0; 
+    background: #f8f9fa; 
+    border: 2px solid #e9ecef; 
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .options label:hover { background: #e2e6ea; border-color: #cbd3da;}
+  .options input[type="radio"] { margin-right: 12px; transform: scale(1.2); }
+  
+  button { 
+    padding: 12px 25px; 
+    background: #34495e; 
+    color: white; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  button:hover { background: #2c3e50; transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+  button:disabled { background: #95a5a6; cursor: not-allowed; transform: none; box-shadow: none;}
+  
+  #quiz-controls { margin-top: 25px; display: flex; justify-content: space-between; align-items: center;}
+  #feedback { margin-top: 20px; font-size: 1.1em; padding: 15px; border-radius: 8px; display: none;}
+  .feedback-correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
+  .feedback-incorrect { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;}
+  
+  #results-screen { display: none; text-align: center; }
+  .score { font-size: 2.5em; color: #27ae60; margin: 20px 0; font-weight: bold;}
+  
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+  table, th, td { border: 1px solid #bdc3c7; }
+  th, td { padding: 10px; text-align: left; }
+  th { background-color: #ecf0f1; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🚀 Operations & Performance Management Playbook</h1>
+  <p>This comprehensive study playbook integrates <strong>Financial Management</strong> and <strong>Performance Management</strong>. It is divided into 4 core phases. At the end, you'll find a dynamic, randomized quiz designed to be taken multiple times so you can test your mastery of all topics!</p>
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <h2 style="color:#3498db;">Phase 1: Financial & Commercial Acumen</h2>
+    <p>Understanding how operational decisions impact the bottom line is critical for Delivery Leaders.</p>
+    
+    <div class="grid-2">
+      <div class="card">
+        <h4>Key Cost Drivers</h4>
+        <ul>
+          <li><strong>Direct Expense (COGS):</strong> Cost of driving revenue (Agents, TLs, QA, Trainers).</li>
+          <li><strong>OPEX (G&A):</strong> Indirect costs (HR, IT, Facilities).</li>
+          <li><strong>Inactive People:</strong> Manage benched agents and training overlap. Keep training attrition low.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Revenue Billing Models</h4>
+        <ul>
+          <li><strong>Per FTE:</strong> Fixed rate. Maximize filled seats.</li>
+          <li><strong>Per Worked Hour:</strong> Paid for login. Optimize attendance & shrinkage.</li>
+          <li><strong>Per Production Hour:</strong> Paid when not in AUX. Minimize AHT & AUX abuse.</li>
+          <li><strong>Per Transaction:</strong> Maximize volume handled.</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="alert">
+      <strong>💰 MLOTT (Money Left on The Table)</strong><br>
+      The cost of missed opportunities! Compare the cost of taking a penalty vs. the cost of overtime to fix it. Always calculate the net ROI.
+    </div>
+
+    <h4>The Staffing Waterfall Math</h4>
+    <p>How to step down from raw volume to physical headcount needed:</p>
+    <ol>
+      <li><strong>Raw Hours:</strong> Total Transactions × AHT.</li>
+      <li><strong>Base People:</strong> Raw Hours ÷ Standard Work Hours per Year.</li>
+      <li><strong>Attendance (Not-in-Office Shrinkage):</strong> Divide Base People by Attendance Rate.</li>
+      <li><strong>Utilization (In-Office Shrinkage):</strong> Divide by Production Utilization Rate.</li>
+      <li><strong>Occupancy:</strong> Divide by Occupancy Rate.</li>
+    </ol>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <h2 style="color:#2ecc71;">Phase 2: Performance & Quartile Management</h2>
+    <p>Structured performance management drives consistent delivery and agent growth.</p>
+    
+    <h4>The 4 Components of Performance Management</h4>
+    <ul>
+      <li><strong>Planning:</strong> Establishing goals and objectives.</li>
+      <li><strong>Developing & Reviewing:</strong> Creating PDPs (Personal Development Plans) and performance reviews.</li>
+      <li><strong>Monitoring:</strong> Regularly tracking progress.</li>
+      <li><strong>Recognition & Rewards:</strong> Rating and recognizing high performers.</li>
+    </ul>
+
+    <h4>Managing by Quartiles</h4>
+    <table>
+      <tr>
+        <th>Quartile</th>
+        <th>Action Items & Strategy</th>
+      </tr>
+      <tr>
+        <td><strong>Q1 (Top Performers)</strong></td>
+        <td>Motivate them! Provide minor opportunity coaching and develop them as a prize (career pathing).</td>
+      </tr>
+      <tr>
+        <td><strong>Q2 & Q3 (Middle Performers)</strong></td>
+        <td>Focus heavily on development. Assign support tasks to build confidence and skills.</td>
+      </tr>
+      <tr>
+        <td><strong>Q4 (Bottom Performers)</strong></td>
+        <td>Work closely on performance. Assign a peer mentor, focus entirely on <strong>RCA</strong> (Root Cause Analysis), follow up strictly, and ensure accountability.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase">
+    <h2 style="color:#9b59b6;">Phase 3: Coaching Excellence & RCA</h2>
+    <p>Effective coaching changes behavior, builds trust, and ensures process compliance.</p>
+    
+    <div class="grid-2">
+      <div class="card">
+        <h4>The GROW Coaching Model</h4>
+        <ul>
+          <li><strong>G - Goal:</strong> Establish desired outcome.</li>
+          <li><strong>R - Reality:</strong> Assess current situation (SMART, tangible).</li>
+          <li><strong>O - Options:</strong> Brainstorm alternatives and action items.</li>
+          <li><strong>W - Will:</strong> Commit to decisions and follow-up.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>The STAR Interview/Feedback Model</h4>
+        <ul>
+          <li><strong>S - Situation:</strong> Set the scene.</li>
+          <li><strong>T - Task:</strong> What needed to be achieved?</li>
+          <li><strong>A - Action:</strong> What course of action was taken and why?</li>
+          <li><strong>R - Result:</strong> The outcome of the actions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Psychology in Coaching</h4>
+    <ul>
+      <li><strong>The Endowment Effect:</strong> People value what they "own." Give agents a sense of ownership over their action plans. Make them come up with their own solutions!</li>
+      <li><strong>Pre-Coaching Prep:</strong> Plan 30 mins before. Actual prep time should <strong>not exceed 15 minutes</strong>. Rely on Hard Evidence.</li>
+      <li><strong>Handling Pushback:</strong> Never just say "NO." Highlight loopholes in their arguments so they reach their own conclusions.</li>
+    </ul>
+
+    <h4>Root Cause Analysis (RCA)</h4>
+    <p>Don't treat the symptom; cure the disease.</p>
+    <ul>
+      <li><strong>Symptom:</strong> What you see (e.g., NPS dropped). Fixing this provides short-term relief.</li>
+      <li><strong>Root Cause:</strong> The hidden issue (e.g., Agent lacked empathy due to stress). Fixing this provides a long-term fix.</li>
+      <li><strong>RCA Tools:</strong> 5 Whys, Fishbone Diagram (Ishikawa), Pareto Analysis (80/20 rule), and Deep Dive Analysis (MoM, WoW, DoD).</li>
+    </ul>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase">
+    <h2 style="color:#e74c3c;">Phase 4: Operational Metrics & WFM Compliance</h2>
+    <p>The numbers that dictate the health of the floor.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>Core WFM Formulas</h4>
+        <ul>
+          <li><strong>Utilization %:</strong> (Productive Time + Available Time) ÷ Paid Hours Onsite.</li>
+          <li><strong>Occupancy %:</strong> Productive Time ÷ (Productive Time + Available Time).</li>
+          <li><strong>AHT:</strong> Talk Time + Hold Time + ACW (Wrap-up).</li>
+          <li><strong>Absenteeism %:</strong> Missing Hours ÷ Scheduled Hours.</li>
+          <li><strong>Attrition %:</strong> Heads needing replacement ÷ Total Headcount.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>SLA vs Interval Compliance (IC)</h4>
+        <ul>
+          <li><strong>SLA:</strong> % of calls answered within a threshold (e.g., 80% in 20s). Focuses on <em>Customer Experience</em>. Aggregated across all intervals.</li>
+          <li><strong>Interval Compliance (IC):</strong> Productive FTEs ÷ Commitment per interval. Focuses on <em>Operational Control</em>. Identifies if staffing is aligned with forecasts <em>per 30-min block</em>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Reactive vs Proactive Staffing</h4>
+    <ul>
+      <li><strong>AHOD (All Hands On Deck):</strong> Reactive, short-term emergency measure for sudden spikes. Everyone jumps on calls.</li>
+      <li><strong>Caplift:</strong> Proactive, structural solution for sustained demand (e.g., raising overtime caps, adding shifts).</li>
+    </ul>
+
+    <h4>Voice of the Customer (VOC)</h4>
+    <ul>
+      <li><strong>CSAT %:</strong> Positive Surveys ÷ Total Surveys.</li>
+      <li><strong>DSAT %:</strong> Negative Surveys ÷ Total Surveys.</li>
+      <li><strong>NPS (Net Promoter Score):</strong> % Promoters - % Detractors.</li>
+    </ul>
+  </div>
+
+  <!-- INTERACTIVE QUIZ SECTION -->
+  <div class="quiz-section">
+    <h2>🧠 Dynamic Knowledge Check</h2>
+    <p>This quiz pulls a random selection of 8 questions from a master test bank covering all 4 phases. <strong>Retake it multiple times to see new questions!</strong></p>
+    
+    <div id="quiz-container">
+      <!-- Questions injected via JS -->
+    </div>
+    
+    <div id="quiz-controls">
+      <span id="question-tracker">Question 1</span>
+      <button id="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+      <button id="next-btn" onclick="nextQuestion()" style="display:none;">Next Question ➔</button>
+    </div>
+    
+    <div id="feedback"></div>
+    
+    <div id="results-screen">
+      <h3>Quiz Complete!</h3>
+      <div class="score" id="final-score">0 / 0</div>
+      <p id="score-message"></p>
+      <button onclick="startQuiz()">Shuffle & Retake Quiz ↻</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Master Question Bank
+  const masterQuestions = [
+    {
+      q: "What does 'Not-In-Office' Shrinkage primarily account for?",
+      options: ["Time spent in coaching and meetings", "Vacation, sickness, holidays, and absence", "Time logged in but waiting for calls", "Excessive talk time"],
+      ans: 1,
+      explanation: "Not-In-Office shrinkage represents time an agent is on payroll but not physically present to work."
+    },
+    {
+      q: "According to Quartile Management, what is the best strategy for Q4 (Bottom Performers)?",
+      options: ["Develop them as a prize and assign minor tasks", "Focus purely on motivation and career pathing", "Assign a peer mentor, focus heavily on RCA, and ensure strict follow-up", "Assign them off-phone support tasks immediately"],
+      ans: 2,
+      explanation: "Q4 agents need close performance monitoring, peer support, Root Cause Analysis (RCA), and strict accountability."
+    },
+    {
+      q: "In the GROW Coaching Model, what does the 'R' stand for?",
+      options: ["Result", "Reality", "Root-cause", "Review"],
+      ans: 1,
+      explanation: "GROW stands for Goal, Reality, Options, Will. Reality assesses the current, tangible situation."
+    },
+    {
+      q: "What is the psychological 'Endowment Effect' in the context of coaching?",
+      options: ["Giving agents financial rewards for meeting KPIs", "Making the agent feel ownership over their action plan so they are more likely to commit", "Endowing an agent with a higher title (e.g., SME)", "The effect of compounding AHT reductions over time"],
+      ans: 1,
+      explanation: "The Endowment Effect is when people value things more because they 'own' them. Getting an agent to build their own action plan increases compliance."
+    },
+    {
+      q: "Which of the following is true regarding SLA vs Interval Compliance (IC)?",
+      options: ["SLA focuses on Operational Control, while IC focuses on Customer Experience.", "SLA measures staffing per 30 minutes, IC measures speed of answer.", "SLA focuses on Customer Experience (speed of answer), while IC focuses on Operational Control (staffing vs forecast).", "There is no difference; they are the same metric."],
+      ans: 2,
+      explanation: "SLA aggregates how fast calls are answered (CX), whereas IC ensures the right amount of staff are in their seats during specific 30-minute intervals (Ops Control)."
+    },
+    {
+      q: "If an operations floor experiences a sudden, unexpected 2-hour spike in volume due to a billing system outage, which action is most appropriate?",
+      options: ["Caplift", "AHOD (All Hands On Deck)", "Firing Q4 agents", "Increasing Shrinkage allocations"],
+      ans: 1,
+      explanation: "AHOD is a reactive, emergency measure for short-term spikes where everyone (even support staff) jumps on calls."
+    },
+    {
+      q: "How do you calculate Occupancy %?",
+      options: ["Productive Time ÷ Paid Hours Onsite", "(Productive Time + Available Time) ÷ Paid Hours", "Productive Time ÷ (Productive Time + Available Time)", "Missing Hours ÷ Scheduled Hours"],
+      ans: 2,
+      explanation: "Occupancy is the percentage of time the agent is actually working (Productive) out of the total time they are ready to work (Productive + Available)."
+    },
+    {
+      q: "In Root Cause Analysis, which tool categorizes causes into branches like 'Man, Machine, Method, Material'?",
+      options: ["Pareto Analysis (80/20)", "Fishbone Diagram (Ishikawa)", "5 Whys", "The STAR Method"],
+      ans: 1,
+      explanation: "The Fishbone (Ishikawa) diagram visually breaks down causes into major categories to find the root issue."
+    },
+    {
+      q: "When preparing for a 1-on-1 coaching session, how much time should typically be spent on 'Pre-Coaching Prep'?",
+      options: ["At least 45 minutes", "Exactly 30 minutes", "No more than 15 minutes", "Zero minutes; it should be entirely spontaneous"],
+      ans: 2,
+      explanation: "Preparation should happen about 30 mins before the session, but the actual prep time itself should not exceed 15 minutes to remain efficient."
+    },
+    {
+      q: "What does MLOTT stand for, and why is it important?",
+      options: ["Money Left On The Table - It calculates the financial impact of missed targets, unhandled volume, or penalties.", "Maximum Labor Over Time Target - It limits overtime expenses.", "Management Level Operations Training Tool - It is used for Q1 agents.", "Mean Length Of Talk Time - It is a replacement for AHT."],
+      ans: 0,
+      explanation: "MLOTT helps leaders understand the real financial cost of operational failures, helping to prioritize investments vs penalties."
+    },
+    {
+      q: "How do you calculate NPS (Net Promoter Score)?",
+      options: ["Total Positive Surveys ÷ Total Surveys", "Promoters % + Passives %", "Promoters % - Detractors %", "(Promoters + Detractors) ÷ Total Surveys"],
+      ans: 2,
+      explanation: "NPS is calculated by taking the percentage of Promoters (usually 9-10 scores) and subtracting the percentage of Detractors (0-6 scores)."
+    },
+    {
+      q: "Which of the following is considered a 'Symptom' rather than a 'Root Cause'?",
+      options: ["The agent was never trained on the new system interface.", "The agent has a high absenteeism rate this month.", "The agent lacks a reliable internet connection at home.", "The agent is taking medication that causes severe morning fatigue."],
+      ans: 1,
+      explanation: "High absenteeism is what you observe (the Symptom). The Root Cause is *why* they are absent (e.g., illness, lack of transport, low motivation)."
+    },
+    {
+      q: "What is the correct 'Waterfall Math' order to determine required headcount?",
+      options: ["Raw Hours ➔ Base People ➔ Attendance (Not-in-office) ➔ Utilization (In-office) ➔ Occupancy", "Raw Hours ➔ Occupancy ➔ Utilization ➔ Attendance ➔ Base People", "Base People ➔ Utilization ➔ Attendance ➔ Occupancy ➔ Raw Hours", "Attendance ➔ Raw Hours ➔ Base People ➔ Occupancy ➔ Utilization"],
+      ans: 0,
+      explanation: "You calculate total workload, find the base FTE, then step up the headcount by accounting for people missing work, people taking breaks, and people waiting for calls."
+    },
+    {
+      q: "What is the primary optimization goal in a 'Per Production Hour' billing model?",
+      options: ["Keep agents logged in as long as possible, even in AUX.", "Minimize AHT and strictly manage AUX abuse to maximize actual working minutes.", "Maximize the number of physical seats filled.", "Cross-skill agents to take chats instead of calls."],
+      ans: 1,
+      explanation: "Since you are only paid for time spent in production (not AUX), minimizing AUX time and keeping agents productive is the key to maximizing revenue."
+    },
+    {
+      q: "In the STAR feedback model, what does the 'A' stand for?",
+      options: ["Accountability", "Assessment", "Action", "Agreement"],
+      ans: 2,
+      explanation: "STAR stands for Situation, Task, Action, and Result. 'Action' details what steps the individual took to handle the task."
+    }
+  ];
+
+  let currentQuestions = [];
+  let currentQuestionIndex = 0;
+  let score = 0;
+
+  const quizContainer = document.getElementById('quiz-container');
+  const feedbackEl = document.getElementById('feedback');
+  const submitBtn = document.getElementById('submit-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const trackerEl = document.getElementById('question-tracker');
+  const resultsScreen = document.getElementById('results-screen');
+  const controlsEl = document.getElementById('quiz-controls');
+
+  // Shuffle array utility
+  function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }
+
+  function startQuiz() {
+    // Shuffle master bank and pick 8 questions
+    const shuffledBank = shuffle([...masterQuestions]);
+    currentQuestions = shuffledBank.slice(0, 8);
+    
+    currentQuestionIndex = 0;
+    score = 0;
+    
+    quizContainer.style.display = 'block';
+    controlsEl.style.display = 'flex';
+    resultsScreen.style.display = 'none';
+    
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = currentQuestions[currentQuestionIndex];
+    let html = `
+      <div class="quiz-question active">
+        <div class="question-title">${currentQuestionIndex + 1}. ${q.q}</div>
+        <div class="options">
+    `;
+    
+    q.options.forEach((opt, index) => {
+      html += `
+        <label>
+          <input type="radio" name="q${currentQuestionIndex}" value="${index}">
+          ${opt}
+        </label>
+      `;
+    });
+    
+    html += `</div></div>`;
+    quizContainer.innerHTML = html;
+    
+    feedbackEl.style.display = 'none';
+    submitBtn.style.display = 'inline-block';
+    nextBtn.style.display = 'none';
+    submitBtn.disabled = false;
+    trackerEl.innerText = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+  }
+
+  function checkAnswer() {
+    const selected = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
+    if (!selected) {
+      alert("Please select an answer first.");
+      return;
+    }
+    
+    const ansIndex = parseInt(selected.value);
+    const q = currentQuestions[currentQuestionIndex];
+    
+    submitBtn.disabled = true;
+    submitBtn.style.display = 'none';
+    nextBtn.style.display = 'inline-block';
+    feedbackEl.style.display = 'block';
+    
+    // Disable radios
+    document.querySelectorAll(`input[name="q${currentQuestionIndex}"]`).forEach(r => r.disabled = true);
+    
+    if (ansIndex === q.ans) {
+      score++;
+      feedbackEl.className = 'feedback-correct';
+      feedbackEl.innerHTML = `✅ <strong>Correct!</strong> <br> ${q.explanation}`;
+    } else {
+      feedbackEl.className = 'feedback-incorrect';
+      feedbackEl.innerHTML = `❌ <strong>Incorrect.</strong> <br> The correct answer was: <em>${q.options[q.ans]}</em>.<br><br>${q.explanation}`;
+    }
+    
+    if (currentQuestionIndex === currentQuestions.length - 1) {
+      nextBtn.innerText = "See Final Results ★";
+    } else {
+      nextBtn.innerText = "Next Question ➔";
+    }
+  }
+
+  function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < currentQuestions.length) {
+      renderQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  function showResults() {
+    quizContainer.style.display = 'none';
+    controlsEl.style.display = 'none';
+    feedbackEl.style.display = 'none';
+    resultsScreen.style.display = 'block';
+    
+    const percentage = Math.round((score / currentQuestions.length) * 100);
+    document.getElementById('final-score').innerText = `${score} / ${currentQuestions.length} (${percentage}%)`;
+    
+    let msg = "";
+    if (percentage === 100) msg = "Perfect score! You are a Performance Management expert! 🏆";
+    else if (percentage >= 80) msg = "Great job! You have a strong grasp of Ops & Finance. 🌟";
+    else if (percentage >= 60) msg = "Good effort! Review the playbook phases and try again. 📚";
+    else msg = "Keep studying! Use this playbook to review the core concepts and retake the quiz. 💪";
+    
+    document.getElementById('score-message').innerText = msg;
+  }
+
+  // Init
+  startQuiz();
+</script>
+
+</body>
+</html>
